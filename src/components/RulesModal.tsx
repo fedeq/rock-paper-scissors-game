@@ -1,14 +1,10 @@
-import {Fragment, useRef, useState} from "react";
+import {Fragment} from "react";
 import {Dialog, Transition} from "@headlessui/react";
 
-export default function RulesModal() {
-  const [open, setOpen] = useState(true);
-
-  const cancelButtonRef = useRef(null);
-
+export default function RulesModal({isOpen, onClose}: {isOpen: boolean; onClose: () => void}) {
   return (
-    <Transition.Root as={Fragment} show={open}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+    <Transition.Root as={Fragment} show={isOpen}>
+      <Dialog as="div" className="relative z-10" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -35,7 +31,7 @@ export default function RulesModal() {
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white p-8 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <header className="flex items-center justify-between">
                   <h1 className="text-dark_text text-4xl font-semibold uppercase">RULES</h1>
-                  <button type="button" onClick={() => setOpen(false)}>
+                  <button type="button" onClick={onClose}>
                     <span className="sr-only font-semibold">Close</span>
                     <svg
                       className="text-header-outline hover:text-dark_text h-8 w-8"
