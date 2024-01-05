@@ -11,31 +11,23 @@ const config: Config = {
         header: {
           outline: "hsl(217, 16%, 45%)",
         },
-        scissors: {
-          gradient: "hsl(39, 89%, 49%) to hsl(40, 84%, 53%)",
-        },
-        paper: {
-          gradient: "hsl(230, 89%, 62%) to hsl(230, 89%, 65%)",
-        },
-        rock: {
-          gradient: "hsl(349, 71%, 52%) to hsl(349, 70%, 56%)",
-        },
-        lizard: {
-          gradient: "hsl(261, 73%, 60%) to hsl(261, 72%, 63%)",
-        },
-        cyan: {
-          gradient: "hsl(189, 59%, 53%) to hsl(189, 58%, 57%)",
-        },
+        dark_text: "hsl(229, 25%, 31%)",
       },
       backgroundImage: {
         radial: "radial-gradient(circle at top, hsl(214, 47%, 23%), hsl(237, 49%, 15%))",
+        paper_gradient: "radial-gradient(circle at top, hsl(230, 89%, 62%),hsl(230, 89%, 65%))",
+        scissors_gradient: "radial-gradient(hsl(39,89%,49%),hsl(40,84%,53%))",
+        rock_gradient: "radial-gradient(hsl(349, 71%, 52%),hsl(349, 70%, 56%))",
+        lizard_gradient: "radial-gradient(hsl(261, 73%, 60%),hsl(261, 72%, 63%))",
+        spock_gradient: "radial-gradient(hsl(189, 59%, 53%),hsl(189, 58%, 57%))",
+        triangle: "url('/bg-triangle.svg')",
       },
       fontFamily: {
         barlowSemiCondensed: ["var(--font-barlow-semi-condensed)"],
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animated")],
 };
 
 export default config;

@@ -1,18 +1,23 @@
 import type {Shape, ShapeName} from "@/types";
 
 import {create} from "zustand";
+import {devtools} from "zustand/middleware";
+
+type GameStatus = "picking" | "win" | "lose" | "draw";
 
 interface GameState {
   score: number;
-  state: "picking" | "playing" | "gameover";
+  gameStatus: GameStatus;
   selectedShape: ShapeName | null;
+  houseShape: Shape | null;
 
   setSelectedShape: (shape: ShapeName) => void;
   resetSelectedShape: () => void;
   setScore: (score: number) => void;
   incrementScore: () => void;
   decrementScore: () => void;
-  setState: (state: "picking" | "playing" | "gameover") => void;
+  setGameStatus: (state: GameStatus) => void;
+  playAgain: () => void;
 
   reset: () => void;
 }
@@ -22,19 +27,16 @@ export const shapes: Partial<Record<ShapeName, Shape>> = {
     name: "rock",
     image: "/icon-rock.svg",
     beats: ["scissors", "lizard"],
-    gradient: "hsl(349, 71%, 52%) to hsl(349, 70%, 56%)",
   },
   paper: {
     name: "paper",
     image: "/icon-paper.svg",
-    beats: ["rock", "cyan"],
-    gradient: "hsl(230, 89%, 62%) to hsl(230, 89%, 65%)",
+    beats: ["rock", "spock"],
   },
   scissors: {
     name: "scissors",
     beats: ["paper", "lizard"],
     image: "/icon-scissors.svg",
-    gradient: "hsl(39, 89%, 49%) to hsl(40, 84%, 53%)",
   },
 };
 
@@ -42,31 +44,67 @@ export const shapes_bouns = {
   ...shapes,
   lizard: {
     name: "lizard",
-    beats: ["paper", "cyan"],
+    beats: ["paper", "spock"],
     image: "/icon-lizard.svg",
-    gradient: "hsl(261, 73%, 60%) to hsl(261, 72%, 63%)",
   },
-  cyan: {
-    name: "cyan",
+  spock: {
+    name: "spock",
     beats: ["rock", "scissors"],
-    image: "/icon-cyan.svg",
-    gradient: "hsl(189, 59%, 53%) to hsl(189, 58%, 57%)",
+    image: "/icon-spock.svg",
   },
 };
 
-export const useGameStore = create<GameState>((set) => {
-  return {
-    score: 12,
-    state: "picking",
-    selectedShape: null,
+export const useGameStore = create<GameState, [["zustand/devtools", GameState]]>(
+  devtools((set, get) => {
+    return {
+      score: 0,
+      gameStatus: "picking",
+      selectedShape: null,
+      houseShape: null,
 
-    setSelectedShape: (shape: ShapeName) => set({selectedShape: shape}),
-    resetSelectedShape: () => set({selectedShape: null}),
-    incrementScore: () => set((state) => ({score: state.score + 1})),
-    decrementScore: () => set((state) => ({score: state.score - 1})),
-    setScore: (score: number) => set({score}),
-    setState: (state: "picking" | "playing" | "gameover") => set({state}),
+      setSelectedShape: (shape: ShapeName) => {
+        const newHouseShape = getRandomShape();
 
-    reset: () => set({score: 0, state: "picking", selectedShape: null}),
-  };
-});
+        if (shape == newHouseShape.name) {
+          set({selectedShape: shape, gameStatus: "draw", houseShape: newHouseShape});
+
+          return;
+        }
+
+        if (newHouseShape.beats.includes(shape)) {
+          set({
+            selectedShape: shape,
+            gameStatus: "lose",
+            houseShape: newHouseShape,
+            score: get().score - 1,
+          });
+
+          return;
+        }
+        set({
+          selectedShape: shape,
+          gameStatus: "win",
+          houseShape: newHouseShape,
+          score: get().score + 1,
+        });
+
+        return;
+      },
+      resetSelectedShape: () => set({selectedShape: null}),
+      incrementScore: () => set((state) => ({score: state.score + 1})),
+      decrementScore: () => set((state) => ({score: state.score - 1})),
+      setScore: (score: number) => set({score}),
+      setGameStatus: (gameStatus: GameStatus) => set({gameStatus}),
+
+      playAgain: () => {
+        set({gameStatus: "picking", selectedShape: null, houseShape: null});
+      },
+
+      reset: () => set({score: 0, gameStatus: "picking", selectedShape: null}),
+    };
+  }),
+);
+
+const getRandomShape = () => {
+  return Object.values(shapes)[Math.floor(Math.random() * Object.values(shapes).length)];
+};
