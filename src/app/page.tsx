@@ -67,7 +67,7 @@ export default function Home() {
   }
 
   return (
-    <section className="mt-10 flex h-full items-center justify-center">
+    <section className="flex h-full items-center justify-center md:mt-10">
       <SelectShape />
     </section>
   );
