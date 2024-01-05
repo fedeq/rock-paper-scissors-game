@@ -1,8 +1,7 @@
 "use client";
 import type {ShapeName} from "@/types";
 
-import {shapes, useGameStore} from "@/store/game";
-import {useScore} from "@/hooks/useScore";
+import {useGameStore} from "@/store/game";
 import {
   LizardCircle,
   PaperCircle,
@@ -12,7 +11,9 @@ import {
   SpockCircle,
 } from "@/components/SelectShape";
 
-const shapeCircles: Record<ShapeName, Function> = {
+type CircleFn = () => JSX.Element;
+
+const shapeCircles: Record<ShapeName, CircleFn> = {
   rock: () => <RockCircle big />,
   paper: () => <PaperCircle big />,
   scissors: () => <ScissorsCircle big />,
@@ -21,7 +22,6 @@ const shapeCircles: Record<ShapeName, Function> = {
 };
 
 export default function Home() {
-  const {incrementScore, decrementScore} = useScore();
   const selectedShape = useGameStore((state) => state.selectedShape);
   const gameStatus = useGameStore((state) => state.gameStatus);
   const houseShape = useGameStore((state) => state.houseShape);
@@ -69,15 +69,6 @@ export default function Home() {
   return (
     <section className="flex h-full items-center justify-center">
       <SelectShape />
-      {/* <button className="text-white" type="button" onClick={createHandleClick("rock")}>
-        <RockIcon />
-      </button>
-      <button className="text-white" type="button" onClick={createHandleClick("paper")}>
-        <PaperIcon />
-      </button>
-      <button className="text-white" type="button" onClick={createHandleClick("scissors")}>
-        <ScissorsIcon />
-      </button> */}
     </section>
   );
 }
