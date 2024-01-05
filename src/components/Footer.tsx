@@ -19,7 +19,7 @@ export function Footer() {
       >
         Rules
       </button>
-      {showModal ? <RulesModal isOpen={showModal} onClose={handleClose} /> : null}
+      <RulesModal isOpen={showModal} onClose={handleClose} />
     </footer>
   );
 }
