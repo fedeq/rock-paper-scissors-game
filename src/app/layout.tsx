@@ -15,7 +15,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html className={`${barlow_semi_condensed.variable}`} lang="en">
       <body className="bg-radial">
-        <div className="font-barlowSemiCondensed container m-auto grid h-full min-h-screen grid-rows-[auto,1fr,auto] px-8">
+        <div className="font-barlowSemiCondensed min-h-dvh container m-auto grid h-full grid-rows-[auto,1fr,auto] px-8">
           <Header />
           <main className="py-4 md:py-8">{children}</main>
           <Footer />
