@@ -16,7 +16,7 @@ export function SelectShape() {
   };
 
   return (
-    <section className="bg-triangle relative flex h-[278px] w-[313px] items-center justify-center bg-center bg-no-repeat">
+    <section className="bg-triangle relative m-20 flex h-[278px] w-[313px] items-center justify-center bg-center bg-no-repeat">
       <button
         className="absolute -left-[20%] -top-[30%]"
         type="button"
