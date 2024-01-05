@@ -26,6 +26,8 @@ export default function Home() {
   const gameStatus = useGameStore((state) => state.gameStatus);
   const houseShape = useGameStore((state) => state.houseShape);
   const playAgain = useGameStore((state) => state.playAgain);
+  const wiggleAnimationClasses =
+    "animate-wiggle animate-infinite animate-duration-1000 animate-delay-0 animate-ease-in-out";
 
   if (gameStatus !== "picking" && selectedShape && houseShape) {
     return (
@@ -34,7 +36,9 @@ export default function Home() {
           <h2 className="text-center text-base font-bold uppercase tracking-widest text-white md:text-2xl">
             You Picked
           </h2>
-          <div className="my-10">{shapeCircles[selectedShape]()}</div>
+          <div className={`my-10 ${gameStatus === "win" ? wiggleAnimationClasses : ""}`}>
+            {shapeCircles[selectedShape]()}
+          </div>
         </div>
         <div className="animate-jump-in animate-delay-[600ms] order-3 col-span-2 mx-4 flex h-full flex-col items-center justify-center md:order-2 md:col-span-1">
           <h2 className="text-center text-4xl font-bold uppercase tracking-wider text-white drop-shadow-md">
