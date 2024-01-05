@@ -29,14 +29,14 @@ export default function Home() {
 
   if (gameStatus !== "picking" && selectedShape && houseShape) {
     return (
-      <section className="mx-auto flex h-[400px] w-full max-w-5xl items-center justify-between">
-        <div className="flex h-full flex-col items-center ">
-          <h2 className="text-center text-2xl font-bold uppercase tracking-wider text-white">
+      <section className="mx-auto grid h-[400px] w-full max-w-5xl grid-cols-2 items-center justify-between md:grid-cols-3">
+        <div className="order-1 flex h-full flex-col-reverse items-center justify-center md:flex-col">
+          <h2 className="text-center text-base font-bold uppercase tracking-widest text-white md:text-2xl">
             You Picked
           </h2>
-          <div className="mt-10">{shapeCircles[selectedShape]()}</div>
+          <div className="my-10">{shapeCircles[selectedShape]()}</div>
         </div>
-        <div className="animate-jump-in animate-delay-[600ms] mx-4 flex h-full flex-col items-center justify-center">
+        <div className="animate-jump-in animate-delay-[600ms] order-3 col-span-2 mx-4 flex h-full flex-col items-center justify-center md:order-2 md:col-span-1">
           <h2 className="text-center text-4xl font-bold uppercase tracking-wider text-white drop-shadow-md">
             {gameStatus === "win" && "You Win"}
             {gameStatus === "lose" && "You Lose"}
@@ -54,11 +54,11 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className=" flex h-full flex-col items-center">
-          <h2 className="text-center text-2xl font-bold uppercase tracking-wider text-white">
+        <div className="order-2 flex h-full flex-col-reverse items-center justify-center md:order-3 md:flex-col">
+          <h2 className="text-center text-base font-bold uppercase tracking-widest text-white md:text-2xl">
             The House Picked
           </h2>
-          <div className="animate-fade animate-delay-200 mt-10">
+          <div className="animate-fade animate-delay-200 my-10">
             {shapeCircles[houseShape.name]()}
           </div>
         </div>

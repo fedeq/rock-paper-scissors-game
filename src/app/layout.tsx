@@ -17,7 +17,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <body className="bg-radial">
         <div className="font-barlowSemiCondensed container m-auto grid h-full min-h-screen grid-rows-[auto,1fr,auto] px-8">
           <Header />
-          <main className="py-8">{children}</main>
+          <main className="py-4 md:py-8">{children}</main>
           <Footer />
         </div>
       </body>

@@ -94,7 +94,7 @@ function ShapeCircle({
   return (
     <div
       className={`${bgClass} flex ${
-        big ? "h-40 w-40 md:h-80 md:w-80" : "h-28 w-28 md:h-40 md:w-40"
+        big ? "h-32 w-32 md:h-80 md:w-80" : "h-28 w-28 md:h-40 md:w-40"
       }  items-center justify-center rounded-full `}
     >
       <div

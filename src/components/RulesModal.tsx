@@ -28,8 +28,8 @@ export default function RulesModal({isOpen, onClose}: {isOpen: boolean; onClose:
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white p-8 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                <header className="flex items-center justify-between">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-2 py-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <header className="flex items-center justify-between px-2">
                   <h1 className="text-dark_text text-4xl font-semibold uppercase">RULES</h1>
                   <button type="button" onClick={onClose}>
                     <span className="sr-only font-semibold">Close</span>
@@ -49,7 +49,7 @@ export default function RulesModal({isOpen, onClose}: {isOpen: boolean; onClose:
                     </svg>
                   </button>
                 </header>
-                <div className="mt-8 flex items-center justify-center">
+                <div className="mt-8 flex items-center justify-center px-1">
                   <RulesImage />
                 </div>
               </Dialog.Panel>
