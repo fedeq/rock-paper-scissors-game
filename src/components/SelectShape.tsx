@@ -16,22 +16,26 @@ export function SelectShape() {
   };
 
   return (
-    <section className="bg-triangle relative m-20 flex h-[278px] w-[313px] items-center justify-center bg-center bg-no-repeat">
+    <section className="bg-triangle relative flex h-[222px] w-[250px] items-center justify-center bg-cover bg-center bg-no-repeat md:m-20 md:h-[278px] md:w-[313px]">
       <button
-        className="absolute -left-[20%] -top-[30%]"
+        className="absolute -left-[10%] -top-[20%] md:-left-[20%] md:-top-[30%]"
         type="button"
         onClick={createHandleClick("paper")}
       >
         <PaperCircle />
       </button>
       <button
-        className="absolute -right-[20%] -top-[30%]"
+        className="absolute -right-[10%] -top-[20%] md:-right-[20%] md:-top-[30%]"
         type="button"
         onClick={createHandleClick("scissors")}
       >
         <ScissorsCircle />
       </button>
-      <button className="absolute -bottom-[20%]" type="button" onClick={createHandleClick("rock")}>
+      <button
+        className="absolute -bottom-[10%] md:-bottom-[20%]"
+        type="button"
+        onClick={createHandleClick("rock")}
+      >
         <RockCircle />
       </button>
     </section>
@@ -90,13 +94,12 @@ function ShapeCircle({
   return (
     <div
       className={`${bgClass} flex ${
-        big ? "h-80 w-80" : "h-40 w-40"
+        big ? "h-40 w-40 md:h-80 md:w-80" : "h-28 w-28 md:h-40 md:w-40"
       }  items-center justify-center rounded-full `}
     >
       <div
-        className={`flex ${
-          big ? "h-60 w-60" : "h-32 w-32"
-        }  items-center justify-center rounded-full bg-white text-[#3B4262] shadow-inner shadow-indigo-200 drop-shadow-md transition-all hover:shadow-xl`}
+        className={`flex h-5/6 w-5/6
+         items-center justify-center rounded-full bg-white text-[#3B4262] shadow-inner shadow-indigo-200 drop-shadow-md transition-all hover:shadow-xl`}
       >
         {children}
       </div>
